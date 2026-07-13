@@ -1,0 +1,19 @@
+# Media & cache — tidak masuk repo
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/debug.log
+
+# Plugin pihak ketiga — Egi install sendiri lewat WP-CLI
+wp-content/plugins/*
+!wp-content/plugins/smkn1-core/
+
+# Tema pihak ketiga — hanya child theme kita yang di-track
+wp-content/themes/*
+!wp-content/themes/astra-child/
+
+# Dump database (kirim manual, jangan di repo)
+*.sql
+
+# OS
+.DS_Store
