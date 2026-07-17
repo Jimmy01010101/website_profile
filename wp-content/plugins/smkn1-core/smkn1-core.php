@@ -18,6 +18,7 @@ define('SMKN1_CORE_PATH', plugin_dir_path(__FILE__));
 define('SMKN1_CORE_URL', plugin_dir_url(__FILE__));
 
 require_once SMKN1_CORE_PATH . 'includes/post-types.php';
+require_once SMKN1_CORE_PATH . 'includes/acf-fields.php';
 
 /**
  * Jalan SEKALI saat plugin diaktifkan.
