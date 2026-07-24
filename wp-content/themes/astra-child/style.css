@@ -1,0 +1,123 @@
+/*
+Theme Name:  SMKN 1 Bengkayang
+Template:    astra
+Version:     1.0.0
+Description: Child theme Astra untuk website profil SMK Negeri 1 Bengkayang.
+Author:      Jimmy Person
+Text Domain: smkn1
+*/
+
+:root {
+	--smkn1-biru:   #1e3a5f;
+	--smkn1-emas:   #d4a017;
+	--smkn1-abu:    #f4f6f8;
+	--smkn1-garis:  #e2e6ea;
+	--smkn1-teks:   #2c3e50;
+}
+
+/* ---------- Grid kartu ---------- */
+.smkn1-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 24px;
+	margin: 32px 0;
+}
+
+.smkn1-kartu {
+	background: #fff;
+	border: 1px solid var(--smkn1-garis);
+	border-radius: 10px;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	transition: box-shadow .2s ease, transform .2s ease;
+}
+
+.smkn1-kartu:hover {
+	box-shadow: 0 6px 20px rgba(30, 58, 95, .12);
+	transform: translateY(-3px);
+}
+
+.smkn1-kode {
+	display: inline-block;
+	align-self: flex-start;
+	background: var(--smkn1-biru);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: .5px;
+	padding: 4px 10px;
+	border-radius: 4px;
+	margin-bottom: 12px;
+}
+
+.smkn1-kartu h2 {
+	font-size: 19px;
+	line-height: 1.35;
+	margin: 0 0 8px;
+}
+
+.smkn1-kartu h2 a {
+	color: var(--smkn1-teks);
+	text-decoration: none;
+}
+
+.smkn1-kartu h2 a:hover { color: var(--smkn1-biru); }
+
+.smkn1-bidang {
+	font-size: 13px;
+	color: #6b7c8f;
+	margin-bottom: 14px;
+}
+
+.smkn1-ringkas {
+	font-size: 14px;
+	line-height: 1.6;
+	color: #55606b;
+	margin-bottom: 18px;
+	flex-grow: 1;
+}
+
+.smkn1-meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid var(--smkn1-garis);
+	padding-top: 14px;
+	font-size: 13px;
+}
+
+.smkn1-kuota strong {
+	color: var(--smkn1-biru);
+	font-size: 17px;
+}
+
+.smkn1-tombol {
+	display: inline-block;
+	background: var(--smkn1-emas);
+	color: #fff !important;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 8px 16px;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+.smkn1-tombol:hover { background: #b8890f; }
+
+/* ---------- Kepala halaman arsip ---------- */
+.smkn1-kepala {
+	background: var(--smkn1-abu);
+	border-left: 4px solid var(--smkn1-biru);
+	padding: 22px 26px;
+	margin-bottom: 8px;
+	border-radius: 0 8px 8px 0;
+}
+
+.smkn1-kepala h1 { margin: 0 0 6px; font-size: 27px; }
+.smkn1-kepala p  { margin: 0; color: #6b7c8f; font-size: 14px; }
+
+@media (max-width: 600px) {
+	.smkn1-grid { grid-template-columns: 1fr; }
+	.smkn1-meta { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
