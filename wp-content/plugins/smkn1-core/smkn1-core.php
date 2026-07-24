@@ -21,6 +21,10 @@ require_once SMKN1_CORE_PATH . 'includes/post-types.php';
 require_once SMKN1_CORE_PATH . 'includes/acf-fields.php';
 require_once SMKN1_CORE_PATH . 'includes/acf-fields-guru.php';
 
+if (is_admin()) {
+    require_once SMKN1_CORE_PATH . 'includes/admin/import-page.php';
+}
+
 /**
  * Jalan SEKALI saat plugin diaktifkan.
  * Tanpa flush, URL /jurusan/ akan 404.
