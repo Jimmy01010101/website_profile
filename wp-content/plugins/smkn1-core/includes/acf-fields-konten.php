@@ -91,30 +91,12 @@ add_action('acf/include_fields', function () {
                 'wrapper' => ['width' => '50'],
             ],
             [
-                'key' => 'field_galeri_foto',
-                'label' => 'Foto',
-                'name' => 'foto',
-                'type' => 'repeater',
-                'layout' => 'block',
-                'button_label' => 'Tambah Foto',
-                'sub_fields' => [
-                    [
-                        'key' => 'field_galeri_foto_gambar',
-                        'label' => 'Gambar',
-                        'name' => 'gambar',
-                        'type' => 'image',
-                        'return_format' => 'array',
-                        'preview_size' => 'medium',
-                        'wrapper' => ['width' => '40'],
-                    ],
-                    [
-                        'key' => 'field_galeri_foto_caption',
-                        'label' => 'Keterangan',
-                        'name' => 'caption',
-                        'type' => 'text',
-                        'wrapper' => ['width' => '60'],
-                    ],
-                ],
+                'key' => 'field_galeri_catatan',
+                'label' => 'Cara Menambah Foto',
+                'name' => 'catatan_foto',
+                'type' => 'message',
+                'message' => 'Simpan album ini dulu, lalu buka kotak <strong>Foto Album</strong> di bawah untuk mengunggah gambar. Gambar utama diatur lewat <strong>Featured Image</strong>.',
+                'new_lines' => 'wpautop',
             ],
         ],
         'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'galeri']]],
@@ -180,4 +162,38 @@ add_action('acf/include_fields', function () {
         'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'agenda']]],
         'show_in_rest' => 1,
     ]);
+
+    /* ---------- SLIDE ---------- */
+    acf_add_local_field_group([
+        'key' => 'group_smkn1_slide',
+        'title' => 'Isi Slide',
+        'fields' => [
+            [
+                'key' => 'field_slide_sub',
+                'label' => 'Subjudul',
+                'name' => 'subjudul',
+                'type' => 'textarea',
+                'rows' => 2,
+            ],
+            [
+                'key' => 'field_slide_tombol_teks',
+                'label' => 'Teks Tombol',
+                'name' => 'tombol_teks',
+                'type' => 'text',
+                'placeholder' => 'Daftar Sekarang',
+                'wrapper' => ['width' => '40'],
+            ],
+            [
+                'key' => 'field_slide_tombol_url',
+                'label' => 'Tautan Tombol',
+                'name' => 'tombol_url',
+                'type' => 'url',
+                'wrapper' => ['width' => '60'],
+            ],
+        ],
+        'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'slide']]],
+        'show_in_rest' => 1,
+    ]);
+
+
 });

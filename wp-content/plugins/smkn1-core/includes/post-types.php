@@ -113,4 +113,25 @@ function smkn1_register_post_types()
         'supports' => ['title', 'editor', 'thumbnail'],
         'rewrite' => ['slug' => 'agenda', 'with_front' => false],
     ]);
+
+    /* ---------- CPT: SLIDE HERO ---------- */
+    register_post_type('slide', [
+        'labels' => [
+            'name' => 'Slide Beranda',
+            'singular_name' => 'Slide',
+            'add_new_item' => 'Tambah Slide Baru',
+            'edit_item' => 'Edit Slide',
+            'all_items' => 'Semua Slide',
+            'not_found' => 'Belum ada slide.',
+            'menu_name' => 'Slide Beranda',
+        ],
+        'public' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-images-alt2',
+        'menu_position' => 25,
+        'supports' => ['title', 'thumbnail', 'page-attributes'],
+        'has_archive' => false,
+        'rewrite' => false,
+    ]);
 }

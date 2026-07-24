@@ -22,6 +22,7 @@ require_once SMKN1_CORE_PATH . 'includes/taxonomies.php';
 require_once SMKN1_CORE_PATH . 'includes/acf-fields.php';
 require_once SMKN1_CORE_PATH . 'includes/acf-fields-guru.php';
 require_once SMKN1_CORE_PATH . 'includes/acf-fields-konten.php';
+require_once SMKN1_CORE_PATH . 'includes/settings-page.php';
 
 if (is_admin()) {
     require_once SMKN1_CORE_PATH . 'includes/admin/import-page.php';
@@ -31,8 +32,11 @@ register_activation_hook(__FILE__, function () {
     smkn1_register_post_types();
     smkn1_register_taxonomies();
     smkn1_seed_terms();
+    smkn1_seed_settings();
     flush_rewrite_rules();
 });
+
+register_deactivation_hook(__FILE__, 'flush_rewrite_rules');
 
 /**
  * Jalan SEKALI saat plugin diaktifkan.
