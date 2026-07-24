@@ -1,19 +1,24 @@
-# Media & cache — tidak masuk repo
+# Media, cache, log
 wp-content/uploads/
 wp-content/upgrade/
 wp-content/cache/
 wp-content/debug.log
+wp-content/index.php
 
-# Plugin pihak ketiga — Egi install sendiri lewat WP-CLI
+# Plugin pihak ketiga — hanya milik kita yang dilacak
 wp-content/plugins/*
 !wp-content/plugins/smkn1-core/
 
-# Tema pihak ketiga — hanya child theme kita yang di-track
+# Tema pihak ketiga — hanya child theme kita
 wp-content/themes/*
 !wp-content/themes/astra-child/
 
-# Dump database (kirim manual, jangan di repo)
+# Cadangan basis data
 *.sql
 
-# OS
+# Stub untuk autocomplete editor
+.wp-stubs/
+
+# Sistem
 .DS_Store
+Thumbs.db

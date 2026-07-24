@@ -381,3 +381,415 @@ Text Domain: smkn1
 	.smkn1-sambutan-foto { max-width: 220px; margin: 0 auto; }
 	.smkn1-seksi { padding: 44px 0; }
 }
+
+/* Batalkan flex bawaan Astra pada wadah seksi beranda */
+.smkn1-seksi > .ast-container,
+.smkn1-statistik > .ast-container,
+.smkn1-cta > .ast-container {
+	display: block;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+/* Beranda dibuat lebar penuh tanpa sidebar */
+.home #primary,
+.home .site-content > .ast-container {
+	display: block;
+	max-width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.home #secondary { display: none; }
+.home .site-content { padding: 0; }
+
+/* ================= PERBAIKAN LEBAR KONTEN ================= */
+
+.smkn1-wadah {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+.smkn1-seksi > .ast-container,
+.smkn1-statistik > .ast-container,
+.smkn1-cta > .ast-container {
+	display: block;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+/* Astra menyisakan ruang sidebar meski tidak dipakai. */
+.home #primary,
+.home #primary.content-area,
+.home .ast-container > #primary {
+	width: 100%;
+	max-width: 100%;
+	flex: 1 1 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.home #secondary { display: none; }
+
+.home .site-content,
+.home .site-content > .ast-container {
+	display: block;
+	max-width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.home .ast-separate-container .ast-article-single,
+.home .ast-separate-container #primary {
+	background: transparent;
+	box-shadow: none;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/* Grid dengan sedikit isi tetap melebar. */
+.smkn1-grid,
+.smkn1-agenda-list,
+.smkn1-galeri-grid {
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+
+/* ================= HEADER ================= */
+
+.smkn1-header {
+	background: #fff;
+	border-bottom: 1px solid var(--smkn1-garis);
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
+.smkn1-topbar {
+	background: var(--smkn1-biru);
+	color: rgba(255, 255, 255, .82);
+	font-size: 13px;
+}
+
+.smkn1-topbar .smkn1-wadah {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	min-height: 38px;
+}
+
+.smkn1-topbar-kiri,
+.smkn1-topbar-kanan {
+	display: flex;
+	gap: 18px;
+	flex-wrap: wrap;
+}
+
+.smkn1-topbar a {
+	color: rgba(255, 255, 255, .82);
+	text-decoration: none;
+}
+.smkn1-topbar a:hover { color: var(--smkn1-emas); }
+
+.smkn1-header-utama .smkn1-wadah {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	min-height: 78px;
+}
+
+.smkn1-brand {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.smkn1-logo {
+	width: 52px;
+	height: 52px;
+	object-fit: contain;
+}
+
+.smkn1-brand-teks strong {
+	display: block;
+	font-size: 17px;
+	line-height: 1.25;
+	color: var(--smkn1-biru);
+}
+
+.smkn1-brand-teks small {
+	display: block;
+	font-size: 12px;
+	color: #7b8794;
+	margin-top: 2px;
+}
+
+.smkn1-nav {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.smkn1-menu {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	gap: 4px;
+	align-items: center;
+}
+
+.smkn1-menu li { position: relative; }
+
+.smkn1-menu > li > a {
+	display: block;
+	padding: 10px 13px;
+	font-size: 14.5px;
+	font-weight: 500;
+	color: var(--smkn1-teks);
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.smkn1-menu > li > a:hover,
+.smkn1-menu > li.current-menu-item > a {
+	background: var(--smkn1-abu);
+	color: var(--smkn1-biru);
+}
+
+/* Submenu */
+.smkn1-menu .sub-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	min-width: 230px;
+	background: #fff;
+	border: 1px solid var(--smkn1-garis);
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+	list-style: none;
+	margin: 0;
+	padding: 6px;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(6px);
+	transition: all .18s ease;
+}
+
+.smkn1-menu li:hover > .sub-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.smkn1-menu .sub-menu a {
+	display: block;
+	padding: 9px 12px;
+	font-size: 14px;
+	color: var(--smkn1-teks);
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.smkn1-menu .sub-menu a:hover {
+	background: var(--smkn1-abu);
+	color: var(--smkn1-biru);
+}
+
+.smkn1-nav-cta {
+	font-size: 13.5px;
+	padding: 9px 20px;
+	white-space: nowrap;
+}
+
+.smkn1-nav-toggle {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	gap: 5px;
+	width: 42px;
+	height: 42px;
+	background: none;
+	border: 1px solid var(--smkn1-garis);
+	border-radius: 6px;
+	cursor: pointer;
+	padding: 0 10px;
+}
+
+.smkn1-nav-toggle span {
+	display: block;
+	height: 2px;
+	background: var(--smkn1-biru);
+	border-radius: 2px;
+	transition: transform .2s ease, opacity .2s ease;
+}
+
+.smkn1-nav-toggle.buka span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.smkn1-nav-toggle.buka span:nth-child(2) { opacity: 0; }
+.smkn1-nav-toggle.buka span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ================= FOOTER ================= */
+
+.smkn1-footer {
+	background: #16283f;
+	color: rgba(255, 255, 255, .72);
+	font-size: 14px;
+	margin-top: 0;
+}
+
+.smkn1-footer-grid {
+	display: grid;
+	grid-template-columns: 1.6fr 1fr 1.2fr 1fr;
+	gap: 40px;
+	padding: 54px 0 40px;
+}
+
+.smkn1-footer h3 {
+	color: #fff;
+	font-size: 18px;
+	margin: 0 0 14px;
+}
+
+.smkn1-footer h4 {
+	color: #fff;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: .6px;
+	margin: 0 0 16px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid var(--smkn1-emas);
+	display: inline-block;
+}
+
+.smkn1-footer p { margin: 0 0 10px; line-height: 1.7; }
+.smkn1-footer a { color: rgba(255, 255, 255, .72); text-decoration: none; }
+.smkn1-footer a:hover { color: var(--smkn1-emas); }
+
+.smkn1-footer-jam { font-size: 13px; opacity: .8; }
+
+.smkn1-footer-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.smkn1-footer-menu li { margin-bottom: 9px; line-height: 1.45; }
+
+.smkn1-footer-sosmed {
+	display: flex;
+	gap: 14px;
+	flex-wrap: wrap;
+	margin-top: 16px;
+	font-size: 13px;
+}
+
+.smkn1-footer-sosmed a {
+	border: 1px solid rgba(255, 255, 255, .2);
+	padding: 5px 12px;
+	border-radius: 4px;
+}
+
+.smkn1-footer-sosmed a:hover {
+	border-color: var(--smkn1-emas);
+	color: var(--smkn1-emas);
+}
+
+.smkn1-peta {
+	display: inline-block;
+	background: var(--smkn1-emas);
+	color: #fff !important;
+	padding: 8px 16px;
+	border-radius: 5px;
+	font-size: 13px;
+	font-weight: 600;
+	margin-bottom: 12px;
+}
+.smkn1-peta:hover { background: #b8890f; color: #fff !important; }
+
+.smkn1-koordinat { font-size: 12px; opacity: .6; }
+
+.smkn1-footer-bawah {
+	border-top: 1px solid rgba(255, 255, 255, .1);
+	padding: 18px 0;
+	font-size: 13px;
+}
+
+.smkn1-footer-bawah .smkn1-wadah {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+/* Sembunyikan footer bawaan Astra bila masih tersisa. */
+.ast-small-footer,
+.site-primary-footer-wrap,
+.site-below-footer-wrap { display: none !important; }
+
+
+/* ================= RESPONSIF ================= */
+
+@media (max-width: 992px) {
+	.smkn1-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 782px) {
+	.smkn1-topbar { display: none; }
+
+	.smkn1-nav-toggle { display: flex; }
+
+	.smkn1-nav {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: #fff;
+		border-top: 1px solid var(--smkn1-garis);
+		box-shadow: 0 10px 26px rgba(0, 0, 0, .1);
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0;
+		padding: 12px 16px 18px;
+		display: none;
+	}
+
+	.smkn1-nav.buka { display: flex; }
+
+	.smkn1-header-utama .smkn1-wadah { position: relative; }
+
+	.smkn1-menu { flex-direction: column; align-items: stretch; gap: 0; }
+	.smkn1-menu > li > a { padding: 12px 8px; border-bottom: 1px solid var(--smkn1-garis); border-radius: 0; }
+
+	.smkn1-menu .sub-menu {
+		position: static;
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+		box-shadow: none;
+		border: 0;
+		border-left: 2px solid var(--smkn1-garis);
+		border-radius: 0;
+		margin: 0 0 0 12px;
+		padding: 0;
+	}
+
+	.smkn1-nav-cta { margin-top: 14px; text-align: center; }
+
+	.smkn1-brand-teks strong { font-size: 15px; }
+	.smkn1-brand-teks small { display: none; }
+
+	.smkn1-footer-grid { grid-template-columns: 1fr; gap: 28px; padding: 40px 0 30px; }
+	.smkn1-footer-bawah .smkn1-wadah { flex-direction: column; text-align: center; }
+}
