@@ -18,6 +18,16 @@ add_action('wp_enqueue_scripts', function () {
         ['astra-parent'],
         wp_get_theme()->get('Version')
     );
+
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'smkn1-hero',
+            get_stylesheet_directory_uri() . '/js/hero.js',
+            [],
+            wp_get_theme()->get('Version'),
+            true
+        );
+    }
 }, 20);
 
 /** Urutkan arsip jurusan dan guru sesuai urutan impor, bukan tanggal. */
