@@ -30,6 +30,7 @@ services:
         define('FS_METHOD', 'direct');
     volumes:
       - ./wp-content:/var/www/html/wp-content
+      - ./scripts:/var/www/html/scripts
 
   phpmyadmin:
     image: phpmyadmin
