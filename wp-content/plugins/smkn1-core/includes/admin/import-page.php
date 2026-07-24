@@ -136,8 +136,23 @@ function smkn1_render_import_page()
 							<td>Tidak</td>
 						</tr>
 					<?php endif; ?>
+					<?php if (!empty($schema['thumbnail'])): ?>
+						<tr>
+							<td>Foto</td>
+							<td><?php echo esc_html(implode(', ', array_slice($schema['thumbnail'], 1))); ?></td>
+							<td>Tidak</td>
+						</tr>
+					<?php endif; ?>
 				</tbody>
 			</table>
+			<?php if (!empty($schema['thumbnail'])): ?>
+				<p class="description" style="padding:8px 0 0">
+					<strong>Cara mengisi foto:</strong> unggah dulu foto ke <a
+						href="<?php echo esc_url(admin_url('upload.php')); ?>">Media</a>,
+					lalu tulis nama filenya di kolom Foto (contoh: <code>budi-santoso.jpg</code>). Boleh dikosongkan &mdash;
+					guru tanpa foto tampil memakai inisial nama.
+				</p>
+			<?php endif; ?>
 			<p style="padding:12px 0 0">
 				<a href="<?php echo esc_url($template_url); ?>" class="button">Unduh template CSV</a>
 				<span class="description">Kolom yang tidak dikenali akan diabaikan.</span>
@@ -179,6 +194,11 @@ function smkn1_render_import_page()
 					<strong><?php echo esc_html($s['perbarui']); ?></strong> diperbarui,
 					<strong><?php echo esc_html($s['lewati']); ?></strong> dilewati,
 					<strong><?php echo esc_html($s['gagal']); ?></strong> gagal.
+					<?php if (!empty($s['foto']) || !empty($s['foto_gagal'])): ?>
+						<br><strong><?php echo esc_html($s['foto'] ?? 0); ?></strong> foto
+						terpasang<?php if (!empty($s['foto_gagal'])): ?>,
+							<strong><?php echo esc_html($s['foto_gagal']); ?></strong> foto tidak ditemukan<?php endif; ?>.
+					<?php endif; ?>
 					<?php if (isset($_POST['dry_run'])): ?>
 						<em>— ini masih uji coba, belum ada yang tersimpan.</em>
 					<?php endif; ?>
