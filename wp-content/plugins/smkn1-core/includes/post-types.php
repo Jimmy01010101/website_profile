@@ -135,3 +135,13 @@ function smkn1_register_post_types()
         'rewrite' => false,
     ]);
 }
+
+/**
+ * WP 7.0 + Astra/Elementor lama membuat sidebar editor blok gagal render.
+ * CPT data (guru, jurusan, prestasi, agenda, slide) tidak butuh editor blok,
+ * jadi dipaksa memakai editor klasik agar Featured Image dan panel muncul.
+ */
+add_filter('use_block_editor_for_post_type', function ($pakai, $tipe) {
+    $klasik = ['guru', 'jurusan', 'prestasi', 'agenda', 'slide'];
+    return in_array($tipe, $klasik, true) ? false : $pakai;
+}, 10, 2);
