@@ -131,7 +131,7 @@ class SMKN1_Importer
 			}
 
 			$slug = sanitize_title($nama);
-			$ada = get_page_by_path($slug, OBJECT, $post_type);
+			$ada = get_page_by_path($slug, OBJECT, [$post_type]);
 			$aksi = $ada ? 'PERBARUI' : 'BARU';
 			$pesan = '';
 

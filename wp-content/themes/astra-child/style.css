@@ -922,3 +922,208 @@ Text Domain: smkn1
 	.smkn1-detail-kepala { padding: 34px 0; }
 	.smkn1-detail-kepala h1 { font-size: 25px; }
 }
+
+/* ================= TAMBAHAN: TEMPLATE BARU ================= */
+
+/* ---------- Halaman statis ---------- */
+.smkn1-halaman {
+	max-width: 820px;
+	line-height: 1.85;
+	color: #46525e;
+}
+.smkn1-halaman h2 {
+	font-size: 24px;
+	color: var(--smkn1-biru);
+	margin: 34px 0 14px;
+	padding-bottom: 8px;
+	border-bottom: 2px solid var(--smkn1-garis);
+}
+.smkn1-halaman h3 { font-size: 19px; color: var(--smkn1-teks); margin: 26px 0 10px; }
+.smkn1-halaman ul,
+.smkn1-halaman ol { padding-left: 22px; }
+.smkn1-halaman li { margin-bottom: 9px; }
+.smkn1-halaman blockquote {
+	background: var(--smkn1-abu);
+	border-left: 4px solid var(--smkn1-emas);
+	margin: 20px 0;
+	padding: 20px 24px;
+	border-radius: 0 8px 8px 0;
+	font-size: 17px;
+	font-style: italic;
+	color: var(--smkn1-teks);
+}
+.smkn1-halaman blockquote p { margin: 0; }
+.smkn1-halaman table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+.smkn1-halaman th,
+.smkn1-halaman td {
+	border: 1px solid var(--smkn1-garis);
+	padding: 10px 14px;
+	text-align: left;
+}
+.smkn1-halaman th { background: var(--smkn1-abu); color: var(--smkn1-biru); }
+
+/* ---------- Daftar butir (mapel, tugas) ---------- */
+.smkn1-daftar-butir {
+	list-style: none;
+	margin: 0 0 26px;
+	padding: 0;
+}
+.smkn1-daftar-butir li {
+	position: relative;
+	padding: 9px 0 9px 26px;
+	border-bottom: 1px solid var(--smkn1-garis);
+	line-height: 1.6;
+}
+.smkn1-daftar-butir li:last-child { border-bottom: 0; }
+.smkn1-daftar-butir li::before {
+	content: '';
+	position: absolute;
+	left: 4px;
+	top: 17px;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--smkn1-emas);
+}
+
+/* ---------- Foto guru besar di halaman detail ---------- */
+.smkn1-guru-foto.besar {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1;
+	max-width: 240px;
+	margin: 0 auto 14px;
+	border-radius: 10px;
+}
+.smkn1-guru-foto.besar img { border-radius: 10px; }
+.smkn1-guru-foto.besar .smkn1-guru-inisial { font-size: 72px; }
+.smkn1-status-tengah { text-align: center; margin: 0; }
+
+/* ---------- Badge emas ---------- */
+.smkn1-kode.emas { background: var(--smkn1-emas); }
+
+/* ---------- Tag berita ---------- */
+.smkn1-tag {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-top: 28px;
+	padding-top: 18px;
+	border-top: 1px solid var(--smkn1-garis);
+}
+.smkn1-tag a {
+	background: var(--smkn1-abu);
+	color: #55606b;
+	padding: 5px 13px;
+	border-radius: 20px;
+	font-size: 13px;
+	text-decoration: none;
+}
+.smkn1-tag a:hover { background: var(--smkn1-biru); color: #fff; }
+
+/* ---------- Form pencarian ---------- */
+.smkn1-cari {
+	display: flex;
+	gap: 10px;
+	max-width: 540px;
+}
+.smkn1-cari input[type="search"] {
+	flex: 1;
+	padding: 11px 16px;
+	border: 1px solid var(--smkn1-garis);
+	border-radius: 6px;
+	font-size: 15px;
+}
+.smkn1-cari input[type="search"]:focus {
+	outline: none;
+	border-color: var(--smkn1-biru);
+}
+.smkn1-cari button {
+	background: var(--smkn1-biru);
+	color: #fff;
+	border: 0;
+	padding: 11px 24px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+.smkn1-cari button:hover { background: #16283f; }
+
+/* ---------- Halaman 404 ---------- */
+.smkn1-404 { max-width: 820px; }
+.smkn1-kartu.tautan-cepat { text-decoration: none; }
+.smkn1-kartu.tautan-cepat h2 { color: var(--smkn1-biru); margin-bottom: 6px; }
+
+/* ---------- Navigasi halaman ---------- */
+.smkn1-halaman-nav {
+	margin-top: 28px;
+	padding-top: 18px;
+	border-top: 1px solid var(--smkn1-garis);
+	font-size: 14px;
+}
+
+/* ---------- Paginasi ---------- */
+.pagination,
+.navigation.pagination {
+	display: flex;
+	justify-content: center;
+	gap: 6px;
+	margin-top: 36px;
+}
+.page-numbers {
+	display: inline-block;
+	padding: 9px 15px;
+	border: 1px solid var(--smkn1-garis);
+	border-radius: 6px;
+	color: var(--smkn1-teks);
+	text-decoration: none;
+	font-size: 14px;
+	background: #fff;
+}
+.page-numbers:hover { border-color: var(--smkn1-biru); color: var(--smkn1-biru); }
+.page-numbers.current {
+	background: var(--smkn1-biru);
+	border-color: var(--smkn1-biru);
+	color: #fff;
+}
+
+/* ---------- Semua halaman dalam tanpa sidebar ---------- */
+.single #secondary,
+.page #secondary,
+.search #secondary,
+.error404 #secondary,
+.archive #secondary { display: none; }
+
+.single #primary,
+.page #primary,
+.search #primary,
+.error404 #primary,
+.archive #primary {
+	width: 100%;
+	max-width: 100%;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.single .site-content > .ast-container,
+.page .site-content > .ast-container,
+.search .site-content > .ast-container,
+.error404 .site-content > .ast-container,
+.archive .site-content > .ast-container {
+	display: block;
+	max-width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+@media (max-width: 600px) {
+	.smkn1-cari { flex-direction: column; }
+	.smkn1-halaman blockquote { font-size: 15px; padding: 16px 18px; }
+}
