@@ -74,17 +74,21 @@ function smkn1_settings_schema()
 }
 
 /** Ambil satu nilai pengaturan. Dipakai di seluruh template. */
-function smkn1_opt($key, $fallback = '')
-{
-    $opt = get_option('smkn1_pengaturan', []);
-    return (isset($opt[$key]) && '' !== $opt[$key]) ? $opt[$key] : $fallback;
+if (!function_exists('smkn1_opt')) {
+    function smkn1_opt($key, $fallback = '')
+    {
+        $opt = get_option('smkn1_pengaturan', []);
+        return (is_array($opt) && isset($opt[$key]) && '' !== $opt[$key]) ? $opt[$key] : $fallback;
+    }
 }
 
 /** Misi disimpan sebagai teks, dipecah jadi array per baris. */
-function smkn1_misi()
-{
-    $raw = smkn1_opt('misi');
-    return array_values(array_filter(array_map('trim', explode("\n", $raw))));
+if (!function_exists('smkn1_misi')) {
+    function smkn1_misi()
+    {
+        $raw = smkn1_opt('misi');
+        return array_values(array_filter(array_map('trim', explode("\n", $raw))));
+    }
 }
 
 /** Isi nilai awal sekali saja. */
@@ -211,14 +215,12 @@ function smkn1_render_settings()
                         </th>
                         <td>
                             <?php if ('textarea' === $tipe): ?>
-                                <textarea id="<?php echo esc_attr($key); ?>"
-                                    name="smkn1_pengaturan[<?php echo esc_attr($key); ?>]" rows="4"
-                                    class="large-text"><?php echo esc_textarea($nilai); ?></textarea>
+                                <textarea id="<?php echo esc_attr($key); ?>" name="smkn1_pengaturan[<?php echo esc_attr($key); ?>]"
+                                    rows="4" class="large-text"><?php echo esc_textarea($nilai); ?></textarea>
 
                             <?php elseif ('textarea_besar' === $tipe): ?>
-                                <textarea id="<?php echo esc_attr($key); ?>"
-                                    name="smkn1_pengaturan[<?php echo esc_attr($key); ?>]" rows="8"
-                                    class="large-text"><?php echo esc_textarea($nilai); ?></textarea>
+                                <textarea id="<?php echo esc_attr($key); ?>" name="smkn1_pengaturan[<?php echo esc_attr($key); ?>]"
+                                    rows="8" class="large-text"><?php echo esc_textarea($nilai); ?></textarea>
 
                             <?php elseif ('checkbox' === $tipe): ?>
                                 <label>
@@ -240,8 +242,8 @@ function smkn1_render_settings()
 
                             <?php else: ?>
                                 <input type="<?php echo 'url' === $tipe ? 'url' : 'text'; ?>" id="<?php echo esc_attr($key); ?>"
-                                    name="smkn1_pengaturan[<?php echo esc_attr($key); ?>]"
-                                    value="<?php echo esc_attr($nilai); ?>" class="regular-text">
+                                    name="smkn1_pengaturan[<?php echo esc_attr($key); ?>]" value="<?php echo esc_attr($nilai); ?>"
+                                    class="regular-text">
                             <?php endif; ?>
                         </td>
                     </tr>
