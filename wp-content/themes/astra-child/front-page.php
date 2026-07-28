@@ -90,7 +90,7 @@ if ($sambutan):
     $foto_id = smkn1_opt('sambutan_foto_id'); ?>
     <section class="smkn1-seksi">
         <div class="ast-container">
-            <div class="smkn1-sambutan">
+            <div class="smkn1-sambutan<?php echo $foto_id ? '' : ' tanpa-foto'; ?>">
                 <?php if ($foto_id): ?>
                     <div class="smkn1-sambutan-foto">
                         <?php echo wp_get_attachment_image($foto_id, 'medium_large'); ?>
@@ -103,6 +103,11 @@ if ($sambutan):
                 <div class="smkn1-sambutan-isi">
                     <h2 class="smkn1-judul-seksi">Sambutan Kepala Sekolah</h2>
                     <?php echo wpautop(esc_html($sambutan)); ?>
+                    <?php $hal_sambutan = get_page_by_path('sambutan-kepala-sekolah', OBJECT, ['page']);
+                    if ($hal_sambutan): ?>
+                        <a class="smkn1-lihat-semua" href="<?php echo esc_url(get_permalink($hal_sambutan)); ?>">Baca
+                            selengkapnya &rarr;</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -121,9 +126,7 @@ if ($jurusan): ?>
             <div class="smkn1-grid">
                 <?php foreach ($jurusan as $j):
                     $kode = get_field('kode_jurusan', $j->ID);
-                    $bidang = get_field('bidang_keahlian', $j->ID);
-                    $kuota = get_field('kuota_siswa', $j->ID);
-                    $link = get_field('link_daftar', $j->ID); ?>
+                    $bidang = get_field('bidang_keahlian', $j->ID); ?>
                     <article class="smkn1-kartu">
                         <?php if ($kode): ?><span class="smkn1-kode">
                                 <?php echo esc_html($kode); ?>
@@ -142,19 +145,9 @@ if ($jurusan): ?>
                                 <?php echo esc_html($j->post_excerpt); ?>
                             </p>
                         <?php endif; ?>
-                        <div class="smkn1-meta">
-                            <span class="smkn1-kuota">
-                                <?php if ($kuota): ?><strong>
-                                        <?php echo esc_html($kuota); ?>
-                                    </strong> siswa
-                                <?php endif; ?>
-                            </span>
-                            <?php if ($link): ?>
-                                <a class="smkn1-tombol" href="<?php echo esc_url($link); ?>" target="_blank"
-                                    rel="noopener">Daftar</a>
-                            <?php else: ?>
-                                <a class="smkn1-tombol" href="<?php echo esc_url(get_permalink($j)); ?>">Selengkapnya</a>
-                            <?php endif; ?>
+                        <div class="smkn1-meta rata-kanan">
+                            <a class="smkn1-lihat-semua" href="<?php echo esc_url(get_permalink($j)); ?>">Selengkapnya
+                                &rarr;</a>
                         </div>
                     </article>
                 <?php endforeach; ?>

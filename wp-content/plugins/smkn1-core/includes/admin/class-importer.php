@@ -140,6 +140,14 @@ class SMKN1_Importer
 				$nilai[$name] = self::sanitize_field($name, $row[$i] ?? '');
 			}
 
+			// Tolak baris yang isinya jelas tergeser kolom.
+			$cacat = self::periksa_baris($post_type, $nama, $nilai);
+			if ($cacat) {
+				$stats['gagal']++;
+				$log[] = ['baris' => $baris, 'aksi' => 'TOLAK', 'nama' => $nama, 'pesan' => implode('; ', $cacat)];
+				continue;
+			}
+
 			if ($dry_run) {
 				$stats['BARU' === $aksi ? 'baru' : 'perbarui']++;
 				$catatan = 'simulasi';
@@ -278,6 +286,63 @@ class SMKN1_Importer
 			'fields' => 'ids',
 		]);
 		return $att ? (int) $att[0] : 0;
+	}
+
+	/**
+	 * Deteksi baris yang kolomnya tergeser.
+	 * Gejala paling sering: berkas dibuka di Excel lalu disimpan ulang
+	 * sehingga angka panjang berubah jadi notasi ilmiah, atau nama yang
+	 * mengandung spasi terpecah ke kolom sebelahnya.
+	 */
+	private static function periksa_baris($post_type, $nama, array $nilai)
+	{
+		$cacat = [];
+
+		foreach ($nilai as $k => $v) {
+			if (is_string($v) && preg_match('/^-?\\d+(\\.\\d+)?E\\+\\d+$/i', trim($v))) {
+				$cacat[] = "kolom {$k} berupa notasi ilmiah, simpan berkas sebagai CSV tanpa dibuka di Excel";
+			}
+		}
+
+		if ('guru' !== $post_type) {
+			return $cacat;
+		}
+
+		if (
+			isset($nilai['nuptk']) && '' !== $nilai['nuptk']
+			&& !ctype_digit(str_replace(' ', '', $nilai['nuptk']))
+		) {
+			$cacat[] = 'NUPTK berisi teks, kemungkinan kolom bergeser';
+		}
+
+		if (
+			isset($nilai['nip']) && '' !== $nilai['nip']
+			&& !ctype_digit(str_replace(' ', '', $nilai['nip']))
+		) {
+			$cacat[] = 'NIP berisi teks, kemungkinan kolom bergeser';
+		}
+
+		$jenis_sah = ['Kepala Sekolah', 'Guru', 'Tenaga Kependidikan'];
+		if (
+			isset($nilai['jenis_ptk']) && '' !== $nilai['jenis_ptk']
+			&& !in_array($nilai['jenis_ptk'], $jenis_sah, true)
+		) {
+			$cacat[] = 'Jenis PTK harus salah satu dari: ' . implode(', ', $jenis_sah);
+		}
+
+		$status_sah = ['PNS', 'PPPK', 'Guru Honor Sekolah', 'Tenaga Honor Sekolah'];
+		if (
+			isset($nilai['status_kepegawaian']) && '' !== $nilai['status_kepegawaian']
+			&& !in_array($nilai['status_kepegawaian'], $status_sah, true)
+		) {
+			$cacat[] = 'Status Kepegawaian harus salah satu dari: ' . implode(', ', $status_sah);
+		}
+
+		if (isset($nilai['gelar_belakang']) && mb_strlen($nilai['gelar_belakang']) > 18) {
+			$cacat[] = 'Gelar Belakang terlalu panjang, kemungkinan kolom bergeser';
+		}
+
+		return $cacat;
 	}
 
 	private static function sanitize_field($name, $raw)

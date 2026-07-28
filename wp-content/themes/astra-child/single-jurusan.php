@@ -1,30 +1,33 @@
 <?php
+/**
+ * Detail satu konsentrasi keahlian.
+ * Kotak samping hanya memuat keterangan akademik. Tautan pendaftaran
+ * diarahkan ke halaman SPMB agar seluruh alur penerimaan terpusat di sana.
+ */
 if (!defined('ABSPATH'))
     exit;
+
 get_header();
+
+$hal_spmb = get_page_by_path('spmb', OBJECT, ['page']);
 
 while (have_posts()):
     the_post();
+
     $kode = get_field('kode_jurusan');
     $bidang = get_field('bidang_keahlian');
     $program = get_field('program_keahlian');
     $kuota = get_field('kuota_siswa');
-    $link = get_field('link_daftar');
     ?>
 
     <section class="smkn1-detail-kepala">
         <div class="smkn1-wadah">
-            <?php if ($kode): ?><span class="smkn1-kode besar">
-                    <?php echo esc_html($kode); ?>
-                </span>
+            <?php if ($kode): ?>
+                <span class="smkn1-kode besar"><?php echo esc_html($kode); ?></span>
             <?php endif; ?>
-            <h1>
-                <?php the_title(); ?>
-            </h1>
+            <h1><?php the_title(); ?></h1>
             <?php if ($bidang): ?>
-                <p>
-                    <?php echo esc_html($bidang); ?>
-                </p>
+                <p><?php echo esc_html($bidang); ?></p>
             <?php endif; ?>
         </div>
     </section>
@@ -34,53 +37,71 @@ while (have_posts()):
             <div class="smkn1-detail-grid">
 
                 <div class="smkn1-detail-isi">
+
                     <?php if (has_post_thumbnail()): ?>
-                        <div class="smkn1-detail-gambar">
-                            <?php the_post_thumbnail('large'); ?>
-                        </div>
+                        <div class="smkn1-detail-gambar"><?php the_post_thumbnail('large'); ?></div>
                     <?php endif; ?>
+
+                    <?php if (has_excerpt()): ?>
+                        <p class="smkn1-intro"><?php echo esc_html(get_the_excerpt()); ?></p>
+                    <?php endif; ?>
+
                     <?php the_content(); ?>
+
+                    <?php if (!get_the_content() && !has_excerpt()): ?>
+                        <p class="smkn1-catatan">Penjelasan lengkap konsentrasi keahlian ini sedang disusun.</p>
+                    <?php endif; ?>
                 </div>
 
                 <aside class="smkn1-detail-sisi">
+
                     <div class="smkn1-info-kotak">
-                        <h3>Informasi</h3>
+                        <h3>Keterangan</h3>
                         <dl>
+                            <?php if ($kode): ?>
+                                <dt>Kode</dt>
+                                <dd><?php echo esc_html($kode); ?></dd>
+                            <?php endif; ?>
                             <?php if ($bidang): ?>
                                 <dt>Bidang Keahlian</dt>
-                                <dd>
-                                    <?php echo esc_html($bidang); ?>
-                                </dd>
+                                <dd><?php echo esc_html($bidang); ?></dd>
                             <?php endif; ?>
                             <?php if ($program): ?>
                                 <dt>Program Keahlian</dt>
-                                <dd>
-                                    <?php echo esc_html($program); ?>
-                                </dd>
+                                <dd><?php echo esc_html($program); ?></dd>
                             <?php endif; ?>
                             <?php if ($kuota): ?>
                                 <dt>Daya Tampung</dt>
-                                <dd>
-                                    <?php echo esc_html($kuota); ?> siswa
-                                </dd>
+                                <dd><?php echo esc_html($kuota); ?> murid</dd>
                             <?php endif; ?>
                         </dl>
-                        <?php if ($link): ?>
-                            <a class="smkn1-tombol besar blok" href="<?php echo esc_url($link); ?>" target="_blank"
-                                rel="noopener">Daftar Sekarang</a>
+
+                        <?php if ($hal_spmb): ?>
+                            <a class="smkn1-tombol blok" href="<?php echo esc_url(get_permalink($hal_spmb)); ?>">
+                                Informasi Pendaftaran
+                            </a>
                         <?php endif; ?>
                     </div>
 
                     <div class="smkn1-info-kotak">
                         <h3>Konsentrasi Lain</h3>
                         <ul class="smkn1-daftar-tautan">
-                            <?php foreach (get_posts(['post_type' => 'jurusan', 'numberposts' => -1, 'exclude' => [get_the_ID()], 'orderby' => 'title', 'order' => 'ASC']) as $j): ?>
-                                <li><a href="<?php echo esc_url(get_permalink($j)); ?>">
-                                        <?php echo esc_html($j->post_title); ?>
-                                    </a></li>
+                            <?php
+                            $lain = get_posts([
+                                'post_type' => 'jurusan',
+                                'numberposts' => -1,
+                                'exclude' => [get_the_ID()],
+                                'orderby' => 'title',
+                                'order' => 'ASC',
+                            ]);
+                            foreach ($lain as $j): ?>
+                                <li><a
+                                        href="<?php echo esc_url(get_permalink($j)); ?>"><?php echo esc_html($j->post_title); ?></a>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
+
                 </aside>
 
             </div>
@@ -88,4 +109,5 @@ while (have_posts()):
     </section>
 
 <?php endwhile;
+
 get_footer();

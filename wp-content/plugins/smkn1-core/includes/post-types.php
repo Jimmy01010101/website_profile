@@ -137,11 +137,13 @@ function smkn1_register_post_types()
 }
 
 /**
- * WP 7.0 + Astra/Elementor lama membuat sidebar editor blok gagal render.
- * CPT data (guru, jurusan, prestasi, agenda, slide) tidak butuh editor blok,
- * jadi dipaksa memakai editor klasik agar Featured Image dan panel muncul.
+ * Jenis konten di bawah ini isinya data terstruktur yang seluruhnya diisi
+ * lewat kotak field, bukan tulisan bebas. Editor klasik lebih sesuai karena
+ * kotak Featured Image dan seluruh panel langsung terlihat tanpa bergantung
+ * pada API editor blok yang masih berubah-ubah di WordPress 7.
+ * Halaman biasa tetap memakai editor blok karena butuh tata letak bebas.
  */
 add_filter('use_block_editor_for_post_type', function ($pakai, $tipe) {
-    $klasik = ['guru', 'jurusan', 'prestasi', 'agenda', 'slide'];
+    $klasik = ['guru', 'jurusan', 'prestasi', 'agenda', 'slide', 'galeri'];
     return in_array($tipe, $klasik, true) ? false : $pakai;
 }, 10, 2);

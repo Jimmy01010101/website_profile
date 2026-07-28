@@ -28,6 +28,7 @@ require_once SMKN1_CORE_PATH . 'includes/settings-page.php';
 require_once SMKN1_CORE_PATH . 'includes/hardening.php';
 require_once SMKN1_CORE_PATH . 'includes/seo.php';
 require_once SMKN1_CORE_PATH . 'includes/halaman-statis.php';
+require_once SMKN1_CORE_PATH . 'includes/sinkron-taksonomi.php';
 
 if (is_admin()) {
     require_once SMKN1_CORE_PATH . 'includes/admin/import-page.php';
