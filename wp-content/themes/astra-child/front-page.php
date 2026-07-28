@@ -14,7 +14,7 @@ if ($slides): ?>
             $bg = get_the_post_thumbnail_url($s->ID, 'full');
             $teks = get_field('tombol_teks', $s->ID);
             $url = get_field('tombol_url', $s->ID); ?>
-            <div class="smkn1-slide <?php echo 0 === $i ? 'aktif' : ''; ?>"
+            <div class="smkn1-slide <?php echo 0 === $i ? 'aktif' : ''; ?><?php echo $bg ? ' berfoto' : ''; ?>"
                 style="<?php echo $bg ? 'background-image:url(' . esc_url($bg) . ')' : ''; ?>">
                 <div class="smkn1-slide-isi">
                     <h1>

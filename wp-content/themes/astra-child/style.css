@@ -1319,3 +1319,97 @@ Text Domain: smkn1
 	.smkn1-ajakan { flex-direction: column; align-items: flex-start; padding: 22px 24px; }
 	.smkn1-intro { font-size: 15.5px; }
 }
+
+/* ================= HERO BERFOTO ================= */
+
+/*
+ * Foto latar dibuat aman untuk segala jenis gambar dengan tiga lapis:
+ * penggelapan menyeluruh, gradasi dari kiri tempat tulisan berada,
+ * dan gradasi dari bawah agar batas ke seksi berikutnya tidak keras.
+ * Tulisan juga diberi bayangan tipis sebagai jaring pengaman terakhir.
+ */
+
+.smkn1-slide.berfoto {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Lapis 1 dan 2: penggelapan rata + gradasi dari kiri. */
+.smkn1-slide.berfoto::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(
+			100deg,
+			rgba(12, 26, 43, .93) 0%,
+			rgba(12, 26, 43, .82) 32%,
+			rgba(16, 34, 56, .58) 62%,
+			rgba(16, 34, 56, .42) 100%
+		),
+		rgba(12, 26, 43, .28);
+}
+
+/* Lapis 3: gradasi bawah supaya menyatu dengan bar statistik. */
+.smkn1-slide.berfoto::after {
+	content: '';
+	position: absolute;
+	inset: auto 0 0 0;
+	height: 45%;
+	background: linear-gradient(to top, rgba(12, 26, 43, .72), transparent);
+	pointer-events: none;
+}
+
+/* Isi harus berada di atas seluruh lapisan filter. */
+.smkn1-slide-isi {
+	position: relative;
+	z-index: 2;
+}
+
+.smkn1-slide.berfoto .smkn1-slide-isi h1 {
+	text-shadow: 0 2px 14px rgba(0, 0, 0, .45);
+}
+
+.smkn1-slide.berfoto .smkn1-slide-isi p {
+	text-shadow: 0 1px 10px rgba(0, 0, 0, .4);
+	opacity: .96;
+}
+
+.smkn1-slide.berfoto .smkn1-tombol.besar {
+	box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
+}
+
+/* Titik navigasi selalu terlihat di atas foto terang. */
+.smkn1-dot {
+	z-index: 3;
+}
+
+.smkn1-dot button {
+	background: rgba(255, 255, 255, .55);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+}
+
+.smkn1-dot button.aktif {
+	background: var(--smkn1-emas);
+}
+
+/* Hero tanpa foto tetap memakai warna sekolah, tanpa lapisan tambahan. */
+.smkn1-hero.kosong .smkn1-slide::before {
+	background: none;
+}
+
+/* Layar kecil: gradasi dibuat vertikal karena tulisan memenuhi lebar. */
+@media (max-width: 782px) {
+	.smkn1-slide.berfoto::before {
+		background:
+			linear-gradient(
+				to bottom,
+				rgba(12, 26, 43, .78) 0%,
+				rgba(12, 26, 43, .88) 100%
+			),
+			rgba(12, 26, 43, .3);
+	}
+
+	.smkn1-slide.berfoto::after { height: 35%; }
+}

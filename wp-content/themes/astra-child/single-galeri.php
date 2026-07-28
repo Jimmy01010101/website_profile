@@ -45,8 +45,8 @@ while (have_posts()):
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
-                <p class="smkn1-catatan">Belum ada foto. Unggah lewat kotak <strong>Media</strong> di halaman edit album ini.
-                </p>
+                <!-- <p class="smkn1-catatan">Belum ada foto.
+                </p> -->
             <?php endif; ?>
         </div>
     </section>
