@@ -1413,3 +1413,572 @@ Text Domain: smkn1
 
 	.smkn1-slide.berfoto::after { height: 35%; }
 }
+
+/* =====================================================================
+   LAPISAN RESPONSIF MENYELURUH
+   Ditempatkan di akhir berkas agar menimpa aturan sebelumnya.
+   Disusun dari layar terbesar ke terkecil.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------
+   1. PENGAMAN DASAR
+   --------------------------------------------------------------- */
+
+html {
+	-webkit-text-size-adjust: 100%;   /* iOS tidak membesarkan teks sendiri saat layar diputar */
+	text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	overflow-x: hidden;               /* cegah geser samping akibat elemen melebar */
+}
+
+/* Media apa pun tidak boleh melebihi wadahnya. */
+img,
+video,
+iframe,
+embed,
+object {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Kata panjang tanpa spasi (tautan, kode) dipotong daripada merusak tata letak. */
+.smkn1-halaman,
+.smkn1-detail-isi,
+.smkn1-ringkas,
+.smkn1-guru-mapel,
+.smkn1-footer,
+.smkn1-kartu {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Tabel dari editor otomatis dapat digulir bila terlalu lebar. */
+.smkn1-halaman table {
+	display: block;
+	overflow-x: auto;
+	white-space: nowrap;
+	max-width: 100%;
+}
+
+@media (min-width: 783px) {
+	.smkn1-halaman table {
+		display: table;
+		white-space: normal;
+	}
+}
+
+/* Isian formulir minimal 16px agar iOS tidak memperbesar layar saat difokus. */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+	font-size: 16px;
+	max-width: 100%;
+}
+
+/* ---------------------------------------------------------------
+   2. UKURAN HURUF LENTUR
+   Menyesuaikan lebar layar tanpa perlu banyak titik henti.
+   --------------------------------------------------------------- */
+
+.smkn1-slide-isi h1      { font-size: clamp(26px, 5.2vw, 46px); line-height: 1.18; }
+.smkn1-slide-isi p       { font-size: clamp(14.5px, 1.9vw, 18px); }
+.smkn1-detail-kepala h1  { font-size: clamp(22px, 3.6vw, 34px); }
+.smkn1-judul-seksi       { font-size: clamp(21px, 3vw, 30px); }
+.smkn1-cta h2            { font-size: clamp(21px, 3vw, 30px); }
+.smkn1-stat-angka        { font-size: clamp(28px, 4.4vw, 42px); }
+.smkn1-halaman h2        { font-size: clamp(19px, 2.6vw, 25px); }
+.smkn1-halaman h3        { font-size: clamp(17px, 2.1vw, 20px); }
+
+/* ---------------------------------------------------------------
+   3. TITIK SENTUH
+   Semua yang bisa ditekan minimal 44px, sesuai anjuran aksesibilitas.
+   --------------------------------------------------------------- */
+
+.smkn1-dot {
+	gap: 4px;
+}
+
+.smkn1-dot button {
+	width: 44px;
+	height: 44px;
+	background: none;
+	box-shadow: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+/* Bulatan yang terlihat digambar sebagai isi, area sentuhnya tetap lebar. */
+.smkn1-dot button::before {
+	content: '';
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .55);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+	transition: background .2s ease, transform .2s ease;
+}
+
+.smkn1-dot button.aktif::before {
+	background: var(--smkn1-emas);
+	transform: scale(1.2);
+}
+
+.smkn1-tombol,
+.smkn1-nav-toggle,
+.smkn1-cari button {
+	min-height: 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.smkn1-menu > li > a {
+	min-height: 44px;
+	display: flex;
+	align-items: center;
+}
+
+/* ---------------------------------------------------------------
+   4. LAYAR SANGAT LEBAR (1400px ke atas)
+   --------------------------------------------------------------- */
+
+@media (min-width: 1400px) {
+	.smkn1-wadah,
+	.smkn1-seksi > .ast-container,
+	.smkn1-statistik > .ast-container,
+	.smkn1-cta > .ast-container,
+	.smkn1-slide-isi {
+		max-width: 1320px;
+	}
+
+	.smkn1-hero { height: 580px; }
+}
+
+/* ---------------------------------------------------------------
+   5. TABLET MENDATAR (993px - 1199px)
+   --------------------------------------------------------------- */
+
+@media (max-width: 1199px) {
+	.smkn1-detail-grid {
+		grid-template-columns: 1fr 300px;
+		gap: 32px;
+	}
+
+	.smkn1-menu > li > a {
+		padding: 10px 10px;
+		font-size: 14px;
+	}
+}
+
+/* ---------------------------------------------------------------
+   6. TABLET TEGAK (783px - 992px)
+   --------------------------------------------------------------- */
+
+@media (max-width: 992px) {
+	.smkn1-detail-grid {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+
+	/* Kotak samping jadi dua kolom agar tidak memanjang ke bawah. */
+	.smkn1-detail-sisi {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 18px;
+		align-items: start;
+	}
+
+	.smkn1-info-kotak { margin-bottom: 0; }
+
+	.smkn1-hero { height: 460px; }
+
+	.smkn1-stat-grid {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 16px;
+	}
+}
+
+/* ---------------------------------------------------------------
+   7. PONSEL (sampai 782px)
+   --------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.smkn1-wadah,
+	.smkn1-seksi > .ast-container,
+	.smkn1-statistik > .ast-container,
+	.smkn1-cta > .ast-container,
+	.smkn1-slide-isi {
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+
+	.smkn1-seksi { padding: 38px 0; }
+
+	/* Tinggi hero mengikuti layar, tetap wajar saat ponsel dimiringkan. */
+	.smkn1-hero {
+		height: auto;
+		min-height: 380px;
+		max-height: 78vh;
+	}
+
+	.smkn1-slide {
+		position: relative;
+		padding: 62px 0;
+	}
+
+	.smkn1-slide:not(.aktif) {
+		position: absolute;
+		padding: 0;
+	}
+
+	.smkn1-slide-isi p { margin-bottom: 20px; }
+
+	/* Statistik dua kolom, jauh lebih padat daripada satu kolom memanjang. */
+	.smkn1-stat-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 22px 12px;
+	}
+
+	.smkn1-statistik { padding: 30px 0; }
+
+	/* Kartu guru dua kolom supaya daftar 50 orang tidak terlalu panjang. */
+	.smkn1-guru-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 12px;
+	}
+
+	.smkn1-guru { padding: 16px 12px; }
+	.smkn1-guru-foto { width: 72px; height: 72px; margin-bottom: 10px; }
+	.smkn1-guru-inisial { font-size: 26px; }
+	.smkn1-guru h3 { font-size: 13.5px; }
+	.smkn1-guru-jabatan { font-size: 12px; }
+	.smkn1-guru-mapel { display: none; }
+
+	.smkn1-detail-sisi { grid-template-columns: 1fr; }
+
+	.smkn1-kepala-baris {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+	}
+
+	.smkn1-galeri-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+	.smkn1-agenda-list { grid-template-columns: 1fr; }
+
+	.smkn1-thumb img { height: 160px; }
+
+	.smkn1-cta { padding: 44px 0; }
+
+	/* Paginasi bisa digulir bila halamannya banyak. */
+	.pagination,
+	.navigation.pagination {
+		overflow-x: auto;
+		justify-content: flex-start;
+		padding-bottom: 6px;
+	}
+}
+
+/* ---------------------------------------------------------------
+   8. TABEL SPMB DI PONSEL
+   Diubah menjadi kartu bertumpuk agar tidak perlu digeser samping.
+   --------------------------------------------------------------- */
+
+@media (max-width: 782px) {
+
+	.smkn1-tabel-bungkus {
+		border: 0;
+		background: none;
+		overflow: visible;
+	}
+
+	.smkn1-tabel-spmb {
+		min-width: 0;
+		display: block;
+	}
+
+	.smkn1-tabel-spmb thead { display: none; }
+
+	.smkn1-tabel-spmb tbody,
+	.smkn1-tabel-spmb tr,
+	.smkn1-tabel-spmb td {
+		display: block;
+		width: 100%;
+	}
+
+	.smkn1-tabel-spmb tr {
+		background: #fff;
+		border: 1px solid var(--smkn1-garis);
+		border-radius: 10px;
+		padding: 16px;
+		margin-bottom: 12px;
+	}
+
+	.smkn1-tabel-spmb tr:hover { background: #fff; }
+
+	.smkn1-tabel-spmb td {
+		border: 0;
+		padding: 4px 0;
+		text-align: left !important;
+	}
+
+	/* Label kolom dimunculkan kembali di depan nilainya. */
+	.smkn1-tabel-spmb td[data-label]::before {
+		content: attr(data-label) ': ';
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: .4px;
+		color: #7b8794;
+		margin-right: 6px;
+	}
+
+	.smkn1-tabel-spmb td:first-child::before { content: none; }
+	.smkn1-tabel-spmb td:nth-child(2) { font-size: 16px; padding: 8px 0 6px; }
+	.smkn1-tabel-spmb td:last-child { padding-top: 12px; }
+	.smkn1-tabel-spmb td:last-child .smkn1-tombol { width: 100%; }
+}
+
+/* ---------------------------------------------------------------
+   9. PONSEL KECIL (sampai 480px)
+   --------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+	.smkn1-wadah,
+	.smkn1-seksi > .ast-container,
+	.smkn1-statistik > .ast-container,
+	.smkn1-cta > .ast-container,
+	.smkn1-slide-isi {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.smkn1-seksi { padding: 30px 0; }
+	.smkn1-detail-kepala { padding: 26px 0; }
+
+	.smkn1-hero { min-height: 340px; }
+	.smkn1-slide { padding: 48px 0; }
+
+	.smkn1-kartu { padding: 18px; }
+	.smkn1-thumb { margin: -18px -18px 14px; }
+
+	.smkn1-info-kotak { padding: 18px; }
+
+	.smkn1-guru-grid { gap: 10px; }
+	.smkn1-guru { padding: 14px 10px; }
+	.smkn1-guru-foto { width: 62px; height: 62px; }
+	.smkn1-guru-inisial { font-size: 22px; }
+
+	.smkn1-galeri-grid { grid-template-columns: 1fr; }
+
+	.smkn1-brand { gap: 10px; }
+	.smkn1-logo { width: 42px; height: 42px; }
+	.smkn1-brand-teks strong { font-size: 14px; }
+
+	.smkn1-footer-sosmed a { padding: 8px 14px; }
+
+	.smkn1-agenda { padding: 14px; gap: 12px; }
+	.smkn1-agenda-tgl { flex: 0 0 52px; }
+	.smkn1-agenda-tgl .hari { font-size: 20px; }
+
+	.smkn1-ajakan { padding: 20px 18px; }
+	.smkn1-tombol.besar { width: 100%; }
+}
+
+/* ---------------------------------------------------------------
+   10. PONSEL MENDATAR
+   Layar pendek: hero tidak boleh menutupi seluruh tampilan.
+   --------------------------------------------------------------- */
+
+@media (max-height: 480px) and (orientation: landscape) {
+	.smkn1-hero {
+		min-height: 260px;
+		max-height: none;
+	}
+
+	.smkn1-slide { padding: 36px 0; }
+	.smkn1-slide-isi h1 { font-size: 24px; margin-bottom: 8px; }
+	.smkn1-slide-isi p { margin-bottom: 14px; }
+
+	.smkn1-nav {
+		max-height: 70vh;
+		overflow-y: auto;
+	}
+}
+
+/* ---------------------------------------------------------------
+   11. PREFERENSI PENGGUNA
+   --------------------------------------------------------------- */
+
+/* Hormati pengaturan perangkat yang meminta gerakan dikurangi. */
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: .01ms !important;
+	}
+
+	.smkn1-kartu:hover,
+	.smkn1-album:hover img {
+		transform: none;
+	}
+}
+
+/* Perangkat sentuh: efek arahkan kursor tidak berguna dan justru mengganggu. */
+@media (hover: none) {
+	.smkn1-kartu:hover {
+		transform: none;
+		box-shadow: none;
+	}
+
+	.smkn1-album:hover img { transform: none; }
+
+	/* Submenu dibuka lewat ketukan, bukan sorotan kursor. */
+	.smkn1-menu li:hover > .sub-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+	}
+}
+
+/* ---------------------------------------------------------------
+   12. CETAK
+   Berguna untuk mencetak daftar guru atau jadwal SPMB.
+   --------------------------------------------------------------- */
+
+@media print {
+	.smkn1-header,
+	.smkn1-footer,
+	.smkn1-hero,
+	.smkn1-dot,
+	.smkn1-nav-toggle,
+	.smkn1-cari,
+	.smkn1-ajakan,
+	.smkn1-cta,
+	.pagination,
+	#wpadminbar {
+		display: none !important;
+	}
+
+	body { background: #fff; color: #000; }
+
+	.smkn1-seksi { padding: 12px 0; }
+
+	.smkn1-detail-kepala {
+		background: none !important;
+		color: #000;
+		border-bottom: 2px solid #000;
+		padding: 0 0 10px;
+	}
+
+	.smkn1-detail-kepala h1 { color: #000; }
+
+	.smkn1-kartu,
+	.smkn1-guru,
+	.smkn1-info-kotak {
+		border: 1px solid #999;
+		box-shadow: none;
+		break-inside: avoid;
+	}
+
+	.smkn1-tabel-spmb th {
+		background: none;
+		color: #000;
+		border-bottom: 2px solid #000;
+	}
+
+	a[href]::after {
+		content: ' (' attr(href) ')';
+		font-size: 10px;
+		color: #555;
+	}
+
+	.smkn1-daftar-tautan a[href]::after,
+	.smkn1-menu a[href]::after { content: none; }
+}
+
+/* ---------------------------------------------------------------
+   13. SUBMENU YANG BISA DILIPAT DI PONSEL
+   --------------------------------------------------------------- */
+
+.smkn1-sub-toggle { display: none; }
+
+@media (max-width: 782px) {
+
+	.smkn1-menu > li.menu-item-has-children {
+		position: relative;
+	}
+
+	.smkn1-sub-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 48px;
+		height: 48px;
+		background: none;
+		border: 0;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	/* Tanda panah digambar dari satu elemen agar tidak perlu berkas ikon. */
+	.smkn1-sub-toggle span {
+		width: 9px;
+		height: 9px;
+		border-right: 2px solid var(--smkn1-biru);
+		border-bottom: 2px solid var(--smkn1-biru);
+		transform: rotate(45deg) translate(-2px, -2px);
+		transition: transform .2s ease;
+	}
+
+	.smkn1-menu > li.sub-buka > .smkn1-sub-toggle span {
+		transform: rotate(-135deg) translate(-2px, -2px);
+	}
+
+	/* Submenu tertutup secara bawaan, dibuka lewat tombol panah. */
+	.smkn1-menu .sub-menu {
+		display: none;
+		position: static;
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+		box-shadow: none;
+		border: 0;
+		border-left: 2px solid var(--smkn1-garis);
+		border-radius: 0;
+		margin: 0 0 0 12px;
+		padding: 0;
+	}
+
+	.smkn1-menu > li.sub-buka > .sub-menu { display: block; }
+
+	.smkn1-menu .sub-menu a {
+		padding: 11px 8px;
+		min-height: 44px;
+		display: flex;
+		align-items: center;
+	}
+
+	/* Beri ruang agar tulisan tidak tertimpa tombol panah. */
+	.smkn1-menu > li.menu-item-has-children > a {
+		padding-right: 52px;
+	}
+}

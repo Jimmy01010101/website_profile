@@ -101,9 +101,10 @@ while (have_posts()):
                                             <?php echo esc_html($j->post_title); ?>
                                         </a>
                                     </td>
-                                    <td class="smkn1-abu-teks"><?php echo esc_html($bidang); ?></td>
-                                    <td class="tengah"><?php echo $kuota ? esc_html($kuota) : '&ndash;'; ?></td>
-                                    <td class="tengah">
+                                    <td class="smkn1-abu-teks" data-label="Bidang"><?php echo esc_html($bidang); ?></td>
+                                    <td class="tengah" data-label="Daya Tampung">
+                                        <?php echo $kuota ? esc_html($kuota) : '&ndash;'; ?></td>
+                                    <td class="tengah" data-label="Pendaftaran">
                                         <?php if ($link): ?>
                                             <a class="smkn1-tombol" href="<?php echo esc_url($link); ?>" target="_blank"
                                                 rel="noopener">Daftar</a>
